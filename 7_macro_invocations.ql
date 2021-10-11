@@ -1,5 +1,10 @@
 import cpp
 
+predicate isNTOH(string name) {
+    name = "ntohs" or name = "ntohl" or name = "ntohll"
+}
+
 from MacroInvocation mcall, Macro m
-where (m.getName() = "ntohs" or m.getName() = "ntohl" or m.getName() = "ntohll") and mcall.getMacro() = m
+where isNTOH(m.getName()) and mcall.getMacro() = m
 select mcall
+
